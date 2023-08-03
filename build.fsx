@@ -48,6 +48,10 @@ module XmlText =
 // --------------------------------------------------------------------------------------
 // Targets
 // --------------------------------------------------------------------------------------
+Target.create "DotnetClean" (fun _ ->
+    dotnet "clean" "."
+)
+
 Target.create "Clean" (fun _ -> Shell.cleanDir deployDir)
 
 Target.create "CleanJs" (fun _ -> Shell.cleanDir deployJsDir)
@@ -120,13 +124,15 @@ open Fake.Core.TargetOperators
 
 "Build"
 
-"Clean"
+"DotnetClean"
+  ==> "Clean"
   ==> "Deploy"
 
 "CleanJs"
   ==> "DeployJs"
 
-"Clean"
+"DotnetClean"
+  ==> "Clean"
   ==> "Meta"
   ==> "Pack"
   ==> "PushToGitlab"
