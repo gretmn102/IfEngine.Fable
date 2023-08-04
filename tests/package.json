@@ -1,0 +1,25 @@
+{
+  "private": true,
+  "scripts": {
+    "dotnet:install": "dotnet tool restore && dotnet paket install",
+    "dotnet:clean": "dotnet clean",
+    "postinstall": "npm run dotnet:install",
+    "fable:build": "dotnet fable src/TestGame.fsproj -o dist",
+    "fable:watch": "npm run fable:build -- --watch",
+    "vite:watch": "vite",
+    "vite:build": "vite build",
+    "dev": "concurrently \"npm:*:watch\"",
+    "deploy": "npm run fable:build && npm run vite:build"
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.1",
+    "sass": "^1.62.1",
+    "vite": "^4.4.1"
+  },
+  "dependencies": {
+    "bulma": "^0.9.0",
+    "bulma-prefers-dark": "0.1.0-beta.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}

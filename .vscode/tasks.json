@@ -42,6 +42,16 @@
                 "PushToGitlab"
             ],
             "problemMatcher": []
+        },
+        {
+            "label": "RunTestGame",
+            "type": "shell",
+            "command": "build",
+            "args": [
+                "-t",
+                "RunTestGame"
+            ],
+            "problemMatcher": []
         }
     ]
 }

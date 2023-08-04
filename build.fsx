@@ -117,6 +117,21 @@ Target.create "PushToGitlab" (fun _ ->
     |> dotnet (sprintf "nuget push -s %s %s" "gitlab" packPath)
 )
 
+Target.create "RunTestGame" (fun _ ->
+    let npmPath =
+        ProcessUtils.findFilesOnPath "npm"
+        |> Seq.tryHead
+        |> Option.defaultWith (fun () ->
+            failwithf "not found npm!"
+        )
+
+    Command.RawCommand(npmPath, Arguments.OfArgs ["run"; "dev"])
+    |> CreateProcess.fromCommand
+    |> CreateProcess.withWorkingDirectory "tests"
+    |> Proc.run
+    |> ignore
+)
+
 // --------------------------------------------------------------------------------------
 // Build order
 // --------------------------------------------------------------------------------------
@@ -128,8 +143,12 @@ open Fake.Core.TargetOperators
   ==> "Clean"
   ==> "Deploy"
 
-"CleanJs"
+"DotnetClean"
+  ==> "CleanJs"
   ==> "DeployJs"
+
+"DotnetClean"
+  ==> "RunTestGame"
 
 "DotnetClean"
   ==> "Clean"

@@ -5,6 +5,10 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "IfEngine.Fable", "src\IfEngine.Fable.fsproj", "{EAEA6375-30AA-4413-B864-2B2CDD9A9C47}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{86D2908D-13FD-4EF1-AC99-485AFFD722E5}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "TestGame", "tests\src\TestGame.fsproj", "{2FB19C6A-A0F9-4129-ACDE-1777FDA215CD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,12 @@ Global
 		{EAEA6375-30AA-4413-B864-2B2CDD9A9C47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EAEA6375-30AA-4413-B864-2B2CDD9A9C47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EAEA6375-30AA-4413-B864-2B2CDD9A9C47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FB19C6A-A0F9-4129-ACDE-1777FDA215CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FB19C6A-A0F9-4129-ACDE-1777FDA215CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FB19C6A-A0F9-4129-ACDE-1777FDA215CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FB19C6A-A0F9-4129-ACDE-1777FDA215CD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2FB19C6A-A0F9-4129-ACDE-1777FDA215CD} = {86D2908D-13FD-4EF1-AC99-485AFFD722E5}
 	EndGlobalSection
 EndGlobal

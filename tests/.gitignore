@@ -1,0 +1,9 @@
+bin
+obj
+/node_modules/
+/paket-files/
+fable_modules
+*.fs.js
+
+/dist/
+/deploy/
