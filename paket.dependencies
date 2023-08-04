@@ -19,7 +19,7 @@ nuget Fable.FontAwesome.Free = 2.1.0
 nuget Fulma = 2.10.0
 
 source https://gitlab.com/api/v4/projects/28574921/packages/nuget/index.json
-nuget FSharpMyExt = 1.10.1
+nuget FSharpMyExt
 nuget IfEngine
 
 group Build

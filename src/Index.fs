@@ -4,8 +4,9 @@ open Fable.FontAwesome
 open Fulma
 open Feliz
 open Zanaptak.TypedCssClasses
-
 open IfEngine
+open IfEngine.Engine
+
 open IfEngine.Fable.Utils
 
 type Bulma = CssClasses<"https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.1/css/bulma.min.css", Naming.PascalCase>
@@ -68,7 +69,7 @@ let gameView addon (state: Game.State<Text, 'LabelName, 'Addon, 'Arg>) dispatch 
         ]
 
     match state.Game with
-    | Interpreter.Print(xs, _) ->
+    | AbstractEngine.Print(xs, _) ->
         Html.div [
             prop.children [
                 print xs
@@ -92,7 +93,7 @@ let gameView addon (state: Game.State<Text, 'LabelName, 'Addon, 'Arg>) dispatch 
                 ]
             ]
         ]
-    | Interpreter.End ->
+    | AbstractEngine.End ->
         Html.div [
             prop.style [
                 style.justifyContent.center
@@ -100,7 +101,7 @@ let gameView addon (state: Game.State<Text, 'LabelName, 'Addon, 'Arg>) dispatch 
             ]
             prop.text "Конец"
         ]
-    | Interpreter.Choices(caption, choices, _) ->
+    | AbstractEngine.Choices(caption, choices, _) ->
         let xs =
             choices
             |> List.mapi (fun i label ->
@@ -123,9 +124,9 @@ let gameView addon (state: Game.State<Text, 'LabelName, 'Addon, 'Arg>) dispatch 
         Html.div [
             prop.children (print caption :: xs)
         ]
-    | Interpreter.AddonAct(arg, _) ->
+    | AbstractEngine.AddonAct(arg, _) ->
         addon arg state dispatch
-    | Interpreter.NextState _ ->
+    | AbstractEngine.NextState _ ->
         failwith "failwith NextState"
 
 let view addon (state: Game.State<Text, 'LabelName, 'Addon, 'Arg>) (dispatch: Game.Msg<'Addon, 'Arg> -> unit) =
