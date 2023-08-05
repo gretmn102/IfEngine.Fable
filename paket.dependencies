@@ -6,7 +6,6 @@ storage:none
 nuget Fable.Core = 3.2.6
 nuget Fable.React = 7.3.0
 nuget Feliz = 1.43.0
-nuget Zanaptak.TypedCssClasses = 0.4.0
 nuget Fable.FontAwesome.Free = 2.1.0
 nuget Fulma = 2.10.0
 
