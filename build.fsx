@@ -126,7 +126,7 @@ Target.create "BuildTestGame" (fun _ ->
     |> dotnet (sprintf "build %s" commonBuildArgs)
 )
 
-Target.create "RunTestGame" (fun _ ->
+let runTestGame () =
     let npmPath =
         ProcessUtils.findFilesOnPath "npm"
         |> Seq.tryHead
@@ -139,6 +139,13 @@ Target.create "RunTestGame" (fun _ ->
     |> CreateProcess.withWorkingDirectory testGameDir
     |> Proc.run
     |> ignore
+
+Target.create "RunTestGame" (fun _ ->
+    runTestGame ()
+)
+
+Target.create "RunTestGameClean" (fun _ ->
+    runTestGame ()
 )
 
 // --------------------------------------------------------------------------------------
@@ -157,7 +164,9 @@ open Fake.Core.TargetOperators
   ==> "DeployJs"
 
 "DotnetClean"
-  ==> "RunTestGame"
+  ==> "RunTestGameClean"
+
+"RunTestGame"
 
 "DotnetClean"
   ==> "BuildTestGame"
