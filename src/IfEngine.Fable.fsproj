@@ -8,6 +8,7 @@
   </Target>
   <ItemGroup>
     <Content Include="*.fsproj; *.fs; *.js;" Exclude="**\*.fs.js" PackagePath="fable\" />
+    <Compile Include="WebEngine.fs" />
     <Compile Include="Utils.fs" />
     <Compile Include="Index.fs" />
   </ItemGroup>

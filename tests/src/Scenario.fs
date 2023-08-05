@@ -4,6 +4,7 @@ open IfEngine
 open IfEngine.Utils
 open IfEngine.Types
 open IfEngine.Fable.Utils
+open IfEngine.Fable.WebEngine
 
 type CustomStatementArg = unit
 
@@ -16,6 +17,8 @@ module CustomStatement =
 
     let handle subIndex customStatement =
         failwithf "not implemented yet"
+
+type CustomStatementOutput = unit
 
 type LabelName =
     | Crossroad
@@ -89,27 +92,3 @@ let scenario, vars =
     |> Map.ofList
     |> fun scenario ->
         (scenario: Scenario<Text, _, CustomStatement>), vars
-
-let gameState, update =
-    let init: State<Text, LabelName, CustomStatement> =
-        State.init beginLoc vars
-
-    let interp gameState =
-        gameState
-        |> AbstractEngine.interp (CustomStatement.apply, CustomStatement.handle) scenario
-        |> function
-            | Ok x -> x
-            | Error err ->
-                failwithf "%s" err
-
-    let gameState =
-        {
-            Game.Game = interp init
-            Game.GameState = init
-            Game.SavedGameState = init
-        }
-
-    let update msg state =
-        Game.update interp init msg state
-
-    gameState, update

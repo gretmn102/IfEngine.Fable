@@ -3,8 +3,6 @@ open Feliz
 
 open IfEngine.Types
 
-type Text = Fable.React.ReactElement list
-
 let divCenter (xs: seq<Fable.React.ReactElement>) =
     Html.div [
         prop.style [

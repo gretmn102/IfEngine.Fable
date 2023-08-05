@@ -4,7 +4,7 @@ open Fable.FontAwesome
 open Fulma
 open Feliz
 open IfEngine
-open IfEngine.Engine
+open IfEngine.Fable.WebEngine
 
 open IfEngine.Fable.Utils
 
@@ -17,7 +17,7 @@ let nav dispatch =
                 prop.children [
                     Html.li [
                         Html.a [
-                            prop.onClick (fun _ -> dispatch Game.NewGame)
+                            prop.onClick (fun _ -> dispatch InputMsg.NewGame)
                             prop.children [
                                 Html.div [
                                     Fa.i [ Fa.Solid.File ] []
@@ -29,7 +29,7 @@ let nav dispatch =
                     ]
                     Html.li [
                         Html.a [
-                            prop.onClick (fun _ -> dispatch Game.Save)
+                            prop.onClick (fun _ -> dispatch InputMsg.Save)
                             prop.children [
                                 Html.div [
                                     Fa.i [ Fa.Solid.Save ] []
@@ -41,7 +41,7 @@ let nav dispatch =
                     ]
                     Html.li [
                         Html.a [
-                            prop.onClick (fun _ -> dispatch Game.Load)
+                            prop.onClick (fun _ -> dispatch InputMsg.Load)
                             prop.children [
                                 Html.div [
                                     Fa.i [ Fa.Solid.Upload ] []
@@ -56,66 +56,78 @@ let nav dispatch =
         ]
     ]
 
-let gameView addon (state: Game.State<Text, 'LabelName, 'Addon, 'Arg>) dispatch =
+let gameView
+    handleCustomStatement
+    (state: WebEngine<'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>)
+    (dispatch: InputMsg<'CustomStatementArg> -> unit) =
+
     let print (xs: ReactElement list) =
         Content.content [] xs
 
-    match state.Game with
-    | AbstractEngine.Print(xs, _) ->
-        Html.div [
-            prop.children [
-                print xs
+    match WebEngine.getCurrentOutputMsg state with
+    | OutputMsg.OutputMsgCore coreMsg ->
+        match coreMsg with
+        | Engine.OutputMsg.Print xs ->
+            Html.div [
+                prop.children [
+                    print xs
 
-                Html.div [
-                    prop.style [
-                        style.justifyContent.center
-                        style.display.flex
-                    ]
-                    prop.children [
-                        Button.button [
-                            Button.OnClick (fun _ -> dispatch Game.Next)
-                        ] [
-                          str "..."
+                    Html.div [
+                        prop.style [
+                            style.justifyContent.center
+                            style.display.flex
+                        ]
+                        prop.children [
+                            Button.button [
+                                Button.OnClick (fun _ ->
+                                    dispatch (InputMsg.InputMsgCore Engine.InputMsg.Next)
+                                )
+                            ] [
+                                str "..."
+                            ]
                         ]
                     ]
                 ]
             ]
-        ]
-    | AbstractEngine.End ->
-        Html.div [
-            prop.style [
-                style.justifyContent.center
-                style.display.flex
+        | Engine.OutputMsg.End ->
+            Html.div [
+                prop.style [
+                    style.justifyContent.center
+                    style.display.flex
+                ]
+                prop.text "Конец"
             ]
-            prop.text "Конец"
-        ]
-    | AbstractEngine.Choices(caption, choices, _) ->
-        let xs =
-            choices
-            |> List.mapi (fun i label ->
-                Html.div [
-                    prop.style [
-                        style.justifyContent.center
-                        style.display.flex
-                    ]
-                    prop.children [
-                        Button.button [
-                            Button.OnClick (fun _ -> dispatch (Game.Choice i))
-                        ] [
-                          str label
+        | Engine.OutputMsg.Choices(caption, choices) ->
+            let xs =
+                choices
+                |> List.mapi (fun i label ->
+                    Html.div [
+                        prop.style [
+                            style.justifyContent.center
+                            style.display.flex
+                        ]
+                        prop.children [
+                            Button.button [
+                                Button.OnClick (fun _ ->
+                                    dispatch (InputMsg.InputMsgCore (Engine.InputMsg.Choice i))
+                                )
+                            ] [
+                                str label
+                            ]
                         ]
                     ]
-                ]
-            )
-        Html.div [
-            prop.children (print caption :: xs)
-        ]
-    | AbstractEngine.AddonAct(arg, _) ->
-        addon arg state dispatch
-    | AbstractEngine.NextState _ ->
-        failwith "failwith NextState"
+                )
+            Html.div [
+                prop.children (print caption :: xs)
+            ]
+        | Engine.OutputMsg.CustomStatement customStatementOutput ->
+            handleCustomStatement customStatementOutput
 
-let view addon (state: Game.State<Text, 'LabelName, 'Addon, 'Arg>) (dispatch: Game.Msg<'Addon, 'Arg> -> unit) =
+let view
+    handleCustomStatement
+    (state: WebEngine<'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>)
+    (dispatch: InputMsg<'CustomStatementArg> -> unit) =
+
     Html.div [
         prop.children [
             nav dispatch
@@ -129,7 +141,7 @@ let view addon (state: Game.State<Text, 'LabelName, 'Addon, 'Arg>) (dispatch: Ga
                         Column.Width (Screen.All, Column.Is6)
                         Column.Offset (Screen.All, Column.Is3)
                     ] [
-                        Box.box' [] [gameView addon state dispatch]
+                        Box.box' [] [ gameView handleCustomStatement state dispatch ]
                     ]
                 ]
             ]
