@@ -116,18 +116,22 @@ let gameView addon (state: Game.State<Text, 'LabelName, 'Addon, 'Arg>) dispatch 
         failwith "failwith NextState"
 
 let view addon (state: Game.State<Text, 'LabelName, 'Addon, 'Arg>) (dispatch: Game.Msg<'Addon, 'Arg> -> unit) =
-    Html.section [
-        prop.style [
-            style.padding 20
-        ]
+    Html.div [
         prop.children [
             nav dispatch
 
-            Column.column [
-                Column.Width (Screen.All, Column.Is6)
-                Column.Offset (Screen.All, Column.Is3)
-            ] [
-                Box.box' [] [gameView addon state dispatch]
+            Html.section [
+                prop.style [
+                    style.padding 20
+                ]
+                prop.children [
+                    Column.column [
+                        Column.Width (Screen.All, Column.Is6)
+                        Column.Offset (Screen.All, Column.Is3)
+                    ] [
+                        Box.box' [] [gameView addon state dispatch]
+                    ]
+                ]
             ]
         ]
     ]
