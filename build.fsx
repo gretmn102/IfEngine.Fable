@@ -32,7 +32,7 @@ let deployJsDir = Path.getFullName "./deployJs"
 let release = ReleaseNotes.load "RELEASE_NOTES.md"
 
 let testGamePath = "tests/src/TestGame.fsproj"
-let testGameName = Path.getFullName testGamePath // System.IO.Path.GetFileName testGamePath
+let testGameName = Path.getFullName testGamePath
 let testGameDir = Path.getDirectory testGamePath
 // --------------------------------------------------------------------------------------
 // Helpers
@@ -122,7 +122,7 @@ Target.create "PushToGitlab" (fun _ ->
 )
 
 Target.create "BuildTestGame" (fun _ ->
-    mainProjDir
+    testGameDir
     |> dotnet (sprintf "build %s" commonBuildArgs)
 )
 
