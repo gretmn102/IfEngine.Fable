@@ -1,3 +1,6 @@
+## 1.2.0
+* breaking: switch to the new `IfEngine.Engine`
+
 ## 1.1.0
 * update `IfEngine` to 1.1.1 version
 * move out nav from main section
