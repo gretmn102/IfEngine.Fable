@@ -3,21 +3,16 @@ open Fable.React
 open Fable.FontAwesome
 open Fulma
 open Feliz
-open Zanaptak.TypedCssClasses
 open IfEngine
 open IfEngine.Engine
 
 open IfEngine.Fable.Utils
 
-type Bulma = CssClasses<"https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.1/css/bulma.min.css", Naming.PascalCase>
-
 let nav dispatch =
     Html.div [
-        prop.className [
-            Bulma.Tabs
-            Bulma.IsCentered
-        ]
-        prop.children [
+        Tabs.tabs [
+            Tabs.IsCentered
+        ] [
             Html.ul [
                 prop.children [
                     Html.li [
@@ -63,10 +58,7 @@ let nav dispatch =
 
 let gameView addon (state: Game.State<Text, 'LabelName, 'Addon, 'Arg>) dispatch =
     let print (xs: ReactElement list) =
-        Html.div [
-            prop.className Bulma.Content
-            prop.children xs
-        ]
+        Content.content [] xs
 
     match state.Game with
     | AbstractEngine.Print(xs, _) ->
@@ -80,14 +72,10 @@ let gameView addon (state: Game.State<Text, 'LabelName, 'Addon, 'Arg>) dispatch 
                         style.display.flex
                     ]
                     prop.children [
-
-                        Html.button [
-                            prop.className [
-                                Bulma.Button
-                            ]
-                            prop.onClick (fun _ -> dispatch Game.Next)
-
-                            prop.text "..."
+                        Button.button [
+                            Button.OnClick (fun _ -> dispatch Game.Next)
+                        ] [
+                          str "..."
                         ]
                     ]
                 ]
@@ -111,12 +99,10 @@ let gameView addon (state: Game.State<Text, 'LabelName, 'Addon, 'Arg>) dispatch 
                         style.display.flex
                     ]
                     prop.children [
-                        Html.button [
-                            prop.className [
-                                Bulma.Button
-                            ]
-                            prop.onClick (fun _ -> dispatch (Game.Choice i))
-                            prop.text label
+                        Button.button [
+                            Button.OnClick (fun _ -> dispatch (Game.Choice i))
+                        ] [
+                          str label
                         ]
                     ]
                 ]
