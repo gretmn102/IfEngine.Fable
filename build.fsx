@@ -30,6 +30,10 @@ let deployDir = Path.getFullName "./deploy"
 let deployJsDir = Path.getFullName "./deployJs"
 
 let release = ReleaseNotes.load "RELEASE_NOTES.md"
+
+let testGamePath = "tests/src/TestGame.fsproj"
+let testGameName = Path.getFullName testGamePath // System.IO.Path.GetFileName testGamePath
+let testGameDir = Path.getDirectory testGamePath
 // --------------------------------------------------------------------------------------
 // Helpers
 // --------------------------------------------------------------------------------------
@@ -117,6 +121,11 @@ Target.create "PushToGitlab" (fun _ ->
     |> dotnet (sprintf "nuget push -s %s %s" "gitlab" packPath)
 )
 
+Target.create "BuildTestGame" (fun _ ->
+    mainProjDir
+    |> dotnet (sprintf "build %s" commonBuildArgs)
+)
+
 Target.create "RunTestGame" (fun _ ->
     let npmPath =
         ProcessUtils.findFilesOnPath "npm"
@@ -127,7 +136,7 @@ Target.create "RunTestGame" (fun _ ->
 
     Command.RawCommand(npmPath, Arguments.OfArgs ["run"; "dev"])
     |> CreateProcess.fromCommand
-    |> CreateProcess.withWorkingDirectory "tests"
+    |> CreateProcess.withWorkingDirectory testGameDir
     |> Proc.run
     |> ignore
 )
@@ -149,6 +158,9 @@ open Fake.Core.TargetOperators
 
 "DotnetClean"
   ==> "RunTestGame"
+
+"DotnetClean"
+  ==> "BuildTestGame"
 
 "DotnetClean"
   ==> "Clean"

@@ -1,3 +1,5 @@
 FSharp.Core
 FSharpMyExt
 IfEngine
+Fable.Elmish
+Fable.Elmish.React
