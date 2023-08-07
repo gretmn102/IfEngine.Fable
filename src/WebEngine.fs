@@ -2,7 +2,7 @@ namespace IfEngine.Fable.WebEngine
 open IfEngine
 open IfEngine.SyntaxTree
 
-type Text = Fable.React.ReactElement list
+open IfEngine.Fable.SyntaxTree
 
 [<RequireQualifiedAccess>]
 type InputMsg<'CustomStatementArg> =

@@ -2,8 +2,8 @@ module Scenario
 open Feliz
 open IfEngine.SyntaxTree
 open IfEngine.SyntaxTree.Helpers
+open IfEngine.Fable.SyntaxTree
 open IfEngine.Fable.SyntaxTree.Helpers
-open IfEngine.Fable.WebEngine
 
 type CustomStatementArg = unit
 
