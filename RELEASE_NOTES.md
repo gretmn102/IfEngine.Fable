@@ -1,3 +1,9 @@
+## 1.3.0
+* feat: add `Utils.sayImg`
+* feat: add `interSay`
+* breaking: rename `Utils` to `SyntaxTree.Helpers`
+* breaking: move `WebEngine.Text` to `SyntaxTree.Text`
+
 ## 1.2.0
 * breaking: switch to the new `IfEngine.Engine`
 
