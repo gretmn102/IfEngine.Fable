@@ -1,6 +1,6 @@
 namespace IfEngine.Fable.WebEngine
 open IfEngine
-open IfEngine.Types
+open IfEngine.SyntaxTree
 
 type Text = Fable.React.ReactElement list
 
@@ -29,7 +29,7 @@ type WebEngine<'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOu
 module WebEngine =
     let create
         (customStatementHandler: Engine.CustomStatementHandler<Text, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>)
-        (scenario: Types.Scenario<Text, 'Label, 'CustomStatement>)
+        (scenario: Scenario<Text, 'Label, 'CustomStatement>)
         (gameState: State<Text, 'Label, 'CustomStatement>)
         : Result<WebEngine<'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>, string> =
 

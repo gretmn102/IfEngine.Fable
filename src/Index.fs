@@ -4,9 +4,8 @@ open Fable.FontAwesome
 open Fulma
 open Feliz
 open IfEngine
-open IfEngine.Fable.WebEngine
 
-open IfEngine.Fable.Utils
+open IfEngine.Fable.WebEngine
 
 let nav dispatch =
     Html.div [

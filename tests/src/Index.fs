@@ -2,6 +2,7 @@ module Index
 open Elmish
 open FsharpMyExtension.ResultExt
 open IfEngine.Engine
+open IfEngine.SyntaxTree
 open IfEngine.Fable.WebEngine
 
 type State =
@@ -16,10 +17,12 @@ let init () =
     let st =
         {
             IfEngineState =
-                WebEngine.create
+                IfEngine.State.init
+                    Scenario.beginLoc
+                    VarsContainer.empty
+                |> WebEngine.create
                     CustomStatementHandler.empty
                     Scenario.scenario
-                    (IfEngine.State.init Scenario.beginLoc Scenario.vars)
                 |> Result.get
         }
     st, Cmd.none

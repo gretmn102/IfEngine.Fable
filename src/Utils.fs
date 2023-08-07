@@ -1,7 +1,7 @@
 module IfEngine.Fable.Utils
 open Feliz
 
-open IfEngine.Types
+open IfEngine.SyntaxTree
 
 let divCenter (xs: seq<Fable.React.ReactElement>) =
     Html.div [
@@ -49,3 +49,11 @@ let sayImg (text: string) imgSrc =
             prop.src imgSrc
         ]
     ]
+
+let interSay (getText: VarsContainer -> string) =
+    InterpolationSay (fun vars ->
+        Html.p [
+            prop.text (getText vars)
+        ]
+        |> List.singleton
+    )
