@@ -38,3 +38,14 @@ let says (xs: string list) =
         ]
     )
     |> Say
+
+let sayImg (text: string) imgSrc =
+    Say [
+        Html.p [
+            prop.text text
+        ]
+
+        Html.img [
+            prop.src imgSrc
+        ]
+    ]
