@@ -1,4 +1,4 @@
-module IfEngine.Fable.Utils
+module IfEngine.Fable.SyntaxTree.Helpers
 open Feliz
 
 open IfEngine.SyntaxTree
