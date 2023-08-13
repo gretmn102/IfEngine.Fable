@@ -1,3 +1,8 @@
+## 2.0.0-prerelease.1.0
+* breaking: rename `Fable.SyntaxTree.Text` to `Fable.SyntaxTree.Content`
+* breaking: convert `WebEngine` to `SavingEngine`
+* feat: use `CommonContent`
+
 ## 1.3.0
 * feat: add `Utils.sayImg`
 * feat: add `interSay`
