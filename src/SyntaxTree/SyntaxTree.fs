@@ -1,2 +1,2 @@
 namespace IfEngine.Fable.SyntaxTree
-type Text = Fable.React.ReactElement list
+type Content = Fable.React.ReactElement list

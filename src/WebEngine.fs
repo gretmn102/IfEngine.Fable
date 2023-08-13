@@ -13,24 +13,24 @@ type InputMsg<'CustomStatementArg> =
 
 [<RequireQualifiedAccess>]
 type OutputMsg<'CustomStatementOutput> =
-    | OutputMsgCore of Engine.OutputMsg<Text, 'CustomStatementOutput>
+    | OutputMsgCore of Engine.OutputMsg<Content, 'CustomStatementOutput>
 
 type WebEngine<'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput> when 'Label: comparison =
     {
-        CoreEngine: Engine.Engine<Text, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>
-        CustomStatementHandler: Engine.CustomStatementHandler<Text, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>
-        Scenario: Scenario<Text, 'Label, 'CustomStatement>
-        InitState: State<Text, 'Label, 'CustomStatement>
-        SavedState: State<Text, 'Label, 'CustomStatement>
+        CoreEngine: Engine.Engine<Content, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>
+        CustomStatementHandler: Engine.CustomStatementHandler<Content, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>
+        Scenario: Scenario<Content, 'Label, 'CustomStatement>
+        InitState: State<Content, 'Label, 'CustomStatement>
+        SavedState: State<Content, 'Label, 'CustomStatement>
     }
 
 [<CompilationRepresentation(CompilationRepresentationFlags.ModuleSuffix)>]
 [<RequireQualifiedAccess>]
 module WebEngine =
     let create
-        (customStatementHandler: Engine.CustomStatementHandler<Text, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>)
-        (scenario: Scenario<Text, 'Label, 'CustomStatement>)
-        (gameState: State<Text, 'Label, 'CustomStatement>)
+        (customStatementHandler: Engine.CustomStatementHandler<Content, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>)
+        (scenario: Scenario<Content, 'Label, 'CustomStatement>)
+        (gameState: State<Content, 'Label, 'CustomStatement>)
         : Result<WebEngine<'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>, string> =
 
         Engine.Engine.create

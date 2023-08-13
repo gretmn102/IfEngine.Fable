@@ -91,4 +91,4 @@ let scenario =
     |> List.map (fun (labelName, body) -> labelName, (labelName, body))
     |> Map.ofList
     |> fun scenario ->
-        (scenario: Scenario<Text, _, CustomStatement>)
+        (scenario: Scenario<Content, _, CustomStatement>)
