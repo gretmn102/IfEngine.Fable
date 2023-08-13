@@ -3,18 +3,18 @@ source https://api.nuget.org/v3/index.json
 framework: netstandard2.0
 storage:none
 
-nuget Fable.Core = 3.2.6
-nuget Fable.React = 7.3.0
-nuget Feliz = 1.43.0
-nuget Fable.FontAwesome.Free = 2.1.0
-nuget Fulma = 2.10.0
+nuget Fable.Core
+nuget Fable.React
+nuget Feliz
+nuget Fable.FontAwesome.Free
+nuget Fulma
 
-nuget Fable.Elmish = 3.1.0
-nuget Fable.Elmish.React = 3.0.1
+nuget Fable.Elmish
+nuget Fable.Elmish.React
 
 source https://gitlab.com/api/v4/projects/28574921/packages/nuget/index.json
-nuget FSharpMyExt
-nuget IfEngine
+nuget FSharpMyExt prerelease
+nuget IfEngine prerelease
 
 group Build
     source https://api.nuget.org/v3/index.json
