@@ -3,7 +3,7 @@ open Elmish
 open FsharpMyExtension.ResultExt
 open IfEngine.Engine
 open IfEngine.SyntaxTree
-open IfEngine.Fable.SyntaxTree
+open IfEngine.SyntaxTree.CommonContent
 open IfEngine.Fable.SavingEngine
 
 type State =

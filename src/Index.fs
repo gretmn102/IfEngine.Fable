@@ -4,6 +4,7 @@ open Fable.FontAwesome
 open Fulma
 open Feliz
 open IfEngine
+open IfEngine.SyntaxTree.CommonContent
 
 open IfEngine.Fable.SavingEngine
 
@@ -57,11 +58,12 @@ let nav dispatch =
 
 let gameView
     handleCustomStatement
-    (state: Engine<SyntaxTree.Content, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>)
+    (state: Engine<Content, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>)
     (dispatch: InputMsg<'CustomStatementArg> -> unit) =
 
-    let print (xs: ReactElement list) =
-        Content.content [] xs
+    let print content =
+        SyntaxTree.Content.ofCommon content
+        |> Content.content []
 
     match Engine.getCurrentOutputMsg state with
     | OutputMsg.OutputMsgCore coreMsg ->
@@ -124,7 +126,7 @@ let gameView
 
 let view
     handleCustomStatement
-    (state: Engine<SyntaxTree.Content, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>)
+    (state: Engine<Content, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>)
     (dispatch: InputMsg<'CustomStatementArg> -> unit) =
 
     Html.div [
