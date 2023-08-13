@@ -5,7 +5,7 @@ open Fulma
 open Feliz
 open IfEngine
 
-open IfEngine.Fable.WebEngine
+open IfEngine.Fable.SavingEngine
 
 let nav dispatch =
     Html.div [
@@ -57,19 +57,19 @@ let nav dispatch =
 
 let gameView
     handleCustomStatement
-    (state: WebEngine<'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>)
+    (state: Engine<SyntaxTree.Content, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>)
     (dispatch: InputMsg<'CustomStatementArg> -> unit) =
 
     let print (xs: ReactElement list) =
         Content.content [] xs
 
-    match WebEngine.getCurrentOutputMsg state with
+    match Engine.getCurrentOutputMsg state with
     | OutputMsg.OutputMsgCore coreMsg ->
         match coreMsg with
-        | Engine.OutputMsg.Print xs ->
+        | Engine.OutputMsg.Print content ->
             Html.div [
                 prop.children [
-                    print xs
+                    print content
 
                     Html.div [
                         prop.style [
@@ -124,7 +124,7 @@ let gameView
 
 let view
     handleCustomStatement
-    (state: WebEngine<'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>)
+    (state: Engine<SyntaxTree.Content, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>)
     (dispatch: InputMsg<'CustomStatementArg> -> unit) =
 
     Html.div [

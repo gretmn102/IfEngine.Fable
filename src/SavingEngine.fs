@@ -1,8 +1,6 @@
-namespace IfEngine.Fable.WebEngine
+namespace IfEngine.Fable.SavingEngine
 open IfEngine
 open IfEngine.SyntaxTree
-
-open IfEngine.Fable.SyntaxTree
 
 [<RequireQualifiedAccess>]
 type InputMsg<'CustomStatementArg> =
@@ -12,26 +10,26 @@ type InputMsg<'CustomStatementArg> =
     | NewGame
 
 [<RequireQualifiedAccess>]
-type OutputMsg<'CustomStatementOutput> =
-    | OutputMsgCore of Engine.OutputMsg<Content, 'CustomStatementOutput>
+type OutputMsg<'Content, 'CustomStatementOutput> =
+    | OutputMsgCore of Engine.OutputMsg<'Content, 'CustomStatementOutput>
 
-type WebEngine<'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput> when 'Label: comparison =
+type Engine<'Content, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput> when 'Label: comparison =
     {
-        CoreEngine: Engine.Engine<Content, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>
-        CustomStatementHandler: Engine.CustomStatementHandler<Content, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>
-        Scenario: Scenario<Content, 'Label, 'CustomStatement>
-        InitState: State<Content, 'Label, 'CustomStatement>
-        SavedState: State<Content, 'Label, 'CustomStatement>
+        CoreEngine: Engine.Engine<'Content, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>
+        CustomStatementHandler: Engine.CustomStatementHandler<'Content, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>
+        Scenario: Scenario<'Content, 'Label, 'CustomStatement>
+        InitState: State<'Content, 'Label, 'CustomStatement>
+        SavedState: State<'Content, 'Label, 'CustomStatement>
     }
 
 [<CompilationRepresentation(CompilationRepresentationFlags.ModuleSuffix)>]
 [<RequireQualifiedAccess>]
-module WebEngine =
+module Engine =
     let create
-        (customStatementHandler: Engine.CustomStatementHandler<Content, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>)
-        (scenario: Scenario<Content, 'Label, 'CustomStatement>)
-        (gameState: State<Content, 'Label, 'CustomStatement>)
-        : Result<WebEngine<'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>, string> =
+        (customStatementHandler: Engine.CustomStatementHandler<'Content, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>)
+        (scenario: Scenario<'Content, 'Label, 'CustomStatement>)
+        (gameState: State<'Content, 'Label, 'CustomStatement>)
+        : Result<Engine<'Content, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>, string> =
 
         Engine.Engine.create
             customStatementHandler
@@ -49,8 +47,8 @@ module WebEngine =
         )
 
     let getCurrentOutputMsg
-        (engine: WebEngine<'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>)
-        : OutputMsg<'CustomStatementOutput> =
+        (engine: Engine<'Content, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>)
+        : OutputMsg<'Content, 'CustomStatementOutput> =
 
         Engine.Engine.getCurrentOutputMsg
             engine.CoreEngine
@@ -58,8 +56,8 @@ module WebEngine =
 
     let update
         (msg: InputMsg<'CustomStatementArg>)
-        (engine: WebEngine<'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>)
-        : Result<WebEngine<'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>, string> =
+        (engine: Engine<'Content, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>)
+        : Result<Engine<'Content, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>, string> =
 
         match msg with
         | InputMsg.InputMsgCore msg ->

@@ -3,11 +3,12 @@ open Elmish
 open FsharpMyExtension.ResultExt
 open IfEngine.Engine
 open IfEngine.SyntaxTree
-open IfEngine.Fable.WebEngine
+open IfEngine.Fable.SyntaxTree
+open IfEngine.Fable.SavingEngine
 
 type State =
     {
-        IfEngineState: WebEngine<Scenario.LabelName, Scenario.CustomStatement, Scenario.CustomStatementArg, Scenario.CustomStatementOutput>
+        IfEngineState: Engine<Content, Scenario.LabelName, Scenario.CustomStatement, Scenario.CustomStatementArg, Scenario.CustomStatementOutput>
     }
 
 type Msg =
@@ -20,7 +21,7 @@ let init () =
                 IfEngine.State.init
                     Scenario.beginLoc
                     VarsContainer.empty
-                |> WebEngine.create
+                |> Engine.create
                     CustomStatementHandler.empty
                     Scenario.scenario
                 |> Result.get
@@ -30,7 +31,7 @@ let init () =
 let update (msg: Msg) (state: State) =
     let updateGame msg =
         let gameState =
-            WebEngine.update msg state.IfEngineState
+            Engine.update msg state.IfEngineState
             |> Result.get
 
         { state with
