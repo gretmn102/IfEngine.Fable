@@ -121,7 +121,7 @@ let scenario: Scenario<CommonContent.Content, _, CustomStatement> =
         label RightRoad [
             if' (Var.get isApplesOnRightRoad) [
                 menu [
-                    p [[ text "По правой дороге ты находишь яблоко." ]]
+                    p [[ text "По правой дороге ты находишь "; bold (text "яблоко"); text "." ]]
                     p [[ img "https://cdn-icons-png.flaticon.com/512/415/415682.png" "apple" "apple" ]]
                 ] [
                     choice "Поднять" [

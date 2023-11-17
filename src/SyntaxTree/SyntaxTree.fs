@@ -88,8 +88,9 @@ module Content =
                     | Statement.Paragraph lines ->
                         Html.p (
                             lines
-                            |> List.collect Line.toReact
-                            |> List.sepBy (Html.br [])
+                            |> List.map Line.toReact
+                            |> List.sepBy [ Html.br [] ]
+                            |> List.concat
                         )
                         |> List.singleton
                     | Statement.Header(level, line, body) ->
