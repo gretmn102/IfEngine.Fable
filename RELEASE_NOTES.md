@@ -1,3 +1,6 @@
+## 2.0.0-prerelease.1.1
+* fix: extra `<br />` between linear elements in `<p>`
+
 ## 2.0.0-prerelease.1.0
 * breaking: rename `Fable.SyntaxTree.Text` to `Fable.SyntaxTree.Content`
 * breaking: convert `WebEngine` to `SavingEngine`
