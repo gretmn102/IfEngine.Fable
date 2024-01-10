@@ -1,28 +1,43 @@
-strategy: min
-source https://api.nuget.org/v3/index.json
-framework: netstandard2.0
-storage:none
+group Main
+    strategy: min
+    source https://api.nuget.org/v3/index.json
+    framework: netstandard2.0
+    storage:none
 
-nuget Fable.Core
-nuget Fable.React
-nuget Feliz
-nuget Fable.FontAwesome.Free
-nuget Fulma
+    nuget FSharp.Core >= 5.0.1 lowest_matching: true
+    nuget Fable.Core >= 4.0 lowest_matching: true
+    nuget Fable.React >= 9.3 lowest_matching: true
+    nuget Feliz >= 2.6 lowest_matching: true
+    nuget Fable.FontAwesome.Free >= 3.0 lowest_matching: true
+    nuget Fulma >= 3.0 lowest_matching: true
 
-nuget Fable.Elmish
-nuget Fable.Elmish.React
+    source https://gitlab.com/api/v4/projects/28574921/packages/nuget/index.json
+    nuget FSharpMyExt >= 2.0.0-prerelease.3 lowest_matching: true
+    nuget IfEngine >= 1.4.0 lowest_matching: true
 
-source https://gitlab.com/api/v4/projects/28574921/packages/nuget/index.json
-nuget FSharpMyExt prerelease
-nuget IfEngine prerelease
+group TestGame
+    strategy: min
+    source https://api.nuget.org/v3/index.json
+    framework: netstandard2.0
+    storage:none
+
+    nuget FSharp.Core >= 5.0.1 lowest_matching: true
+    nuget Fable.Core >= 4.0 lowest_matching: true
+    nuget Fable.Elmish >= 4.0.2 lowest_matching: true
+    nuget Fable.Elmish.React >= 4.0 lowest_matching: true
+
+    source https://gitlab.com/api/v4/projects/28574921/packages/nuget/index.json
+    nuget FSharpMyExt >= 2.0.0-prerelease.3 lowest_matching: true
+    nuget IfEngine >= 1.4.0 lowest_matching: true
 
 group Build
+    strategy: min
     source https://api.nuget.org/v3/index.json
     framework: netstandard2.0
     storage: none
 
-    nuget FSharp.Core = 5.0.1
-    nuget Fake.Core.ReleaseNotes = 5.20.4
-    nuget Fake.Core.Target = 5.20.4
-    nuget Fake.DotNet.Cli = 5.20.4
-    nuget Fake.IO.FileSystem = 5.20.4
+    nuget FSharp.Core >= 5.0.1 lowest_matching: true
+    nuget Fake.Core.ReleaseNotes >= 5.20.4 lowest_matching: true
+    nuget Fake.Core.Target >= 5.20.4 lowest_matching: true
+    nuget Fake.DotNet.Cli >= 5.20.4 lowest_matching: true
+    nuget Fake.IO.FileSystem >= 5.20.4 lowest_matching: true
