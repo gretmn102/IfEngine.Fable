@@ -67,18 +67,31 @@ module Engine =
                     CoreEngine = coreEngine
                 }
             )
+
         | InputMsg.Save ->
             { engine with
                 SavedState = engine.CoreEngine.GameState
             }
             |> Ok
+
         | InputMsg.Load ->
-            create
+            Engine.Engine.create
                 engine.CustomStatementHandler
                 engine.Scenario
                 engine.SavedState
+            |> Result.map (fun coreEngine ->
+                { engine with
+                    CoreEngine = coreEngine
+                }
+            )
+
         | InputMsg.NewGame ->
-            create
+            Engine.Engine.create
                 engine.CustomStatementHandler
                 engine.Scenario
                 engine.InitState
+            |> Result.map (fun coreEngine ->
+                { engine with
+                    CoreEngine = coreEngine
+                }
+            )
