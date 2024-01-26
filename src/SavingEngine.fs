@@ -18,8 +18,8 @@ type Engine<'Content, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStat
         CoreEngine: Engine.Engine<'Content, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>
         CustomStatementHandler: Engine.CustomStatementHandler<'Content, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>
         Scenario: Scenario<'Content, 'Label, 'CustomStatement>
-        InitState: State<'Content, 'Label, 'CustomStatement>
-        SavedState: State<'Content, 'Label, 'CustomStatement>
+        InitState: State<'Content, 'Label>
+        SavedState: State<'Content, 'Label>
     }
 
 [<CompilationRepresentation(CompilationRepresentationFlags.ModuleSuffix)>]
@@ -28,7 +28,7 @@ module Engine =
     let create
         (customStatementHandler: Engine.CustomStatementHandler<'Content, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>)
         (scenario: Scenario<'Content, 'Label, 'CustomStatement>)
-        (gameState: State<'Content, 'Label, 'CustomStatement>)
+        (gameState: State<'Content, 'Label>)
         : Result<Engine<'Content, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>, string> =
 
         Engine.Engine.create

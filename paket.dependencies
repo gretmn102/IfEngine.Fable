@@ -13,7 +13,7 @@ group Main
 
     source https://gitlab.com/api/v4/projects/28574921/packages/nuget/index.json
     nuget FSharpMyExt >= 2.0.0-prerelease.3 lowest_matching: true
-    nuget IfEngine >= 1.4.0 lowest_matching: true
+    nuget IfEngine >= 2.0.0-prerelease.3 lowest_matching: true
 
 group TestGame
     strategy: min
@@ -28,7 +28,7 @@ group TestGame
 
     source https://gitlab.com/api/v4/projects/28574921/packages/nuget/index.json
     nuget FSharpMyExt >= 2.0.0-prerelease.3 lowest_matching: true
-    nuget IfEngine >= 1.4.0 lowest_matching: true
+    nuget IfEngine >= 2.0.0-prerelease.3 lowest_matching: true
 
 group Build
     strategy: min

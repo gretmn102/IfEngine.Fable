@@ -147,5 +147,4 @@ let scenario: Scenario<CommonContent.Content, _, CustomStatement> =
             ]
         ]
     ]
-    |> List.map (fun (labelName, body) -> labelName, (labelName, body))
-    |> Map.ofList
+    |> Scenario.ofNamedBlockList
