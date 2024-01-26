@@ -1,3 +1,7 @@
+## 2.0.0-prerelease.2
+* fix: when starting a new game, the saved game is loaded
+* update `IfEngine` to 2.0.0-prerelease.3
+
 ## 2.0.0-prerelease.1.1
 * fix: extra `<br />` between linear elements in `<p>`
 
