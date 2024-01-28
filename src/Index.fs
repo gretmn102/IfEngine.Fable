@@ -58,7 +58,7 @@ let nav dispatch =
 
 let gameView
     handleCustomStatement
-    (state: Engine<Content, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>)
+    (state: Engine<Content, 'Label, 'VarsContainer, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>)
     (dispatch: InputMsg<'CustomStatementArg> -> unit) =
 
     let print content =
@@ -126,7 +126,7 @@ let gameView
 
 let view
     handleCustomStatement
-    (state: Engine<Content, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>)
+    (state: Engine<Content, 'Label, 'VarsContainer, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>)
     (dispatch: InputMsg<'CustomStatementArg> -> unit) =
 
     Html.div [

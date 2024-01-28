@@ -13,23 +13,23 @@ type InputMsg<'CustomStatementArg> =
 type OutputMsg<'Content, 'CustomStatementOutput> =
     | OutputMsgCore of Engine.OutputMsg<'Content, 'CustomStatementOutput>
 
-type Engine<'Content, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput> when 'Label: comparison =
+type Engine<'Content, 'Label, 'VarsContainer, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput> when 'Label: comparison =
     {
-        CoreEngine: Engine.Engine<'Content, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>
-        CustomStatementHandler: Engine.CustomStatementHandler<'Content, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>
-        Scenario: Scenario<'Content, 'Label, 'CustomStatement>
-        InitState: State<'Content, 'Label>
-        SavedState: State<'Content, 'Label>
+        CoreEngine: Engine.Engine<'Content, 'Label, 'VarsContainer, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>
+        CustomStatementHandler: Engine.CustomStatementHandler<'Content, 'Label, 'VarsContainer, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>
+        Scenario: Scenario<'Content, 'Label, 'VarsContainer, 'CustomStatement>
+        InitState: State<'Content, 'Label, 'VarsContainer>
+        SavedState: State<'Content, 'Label, 'VarsContainer>
     }
 
 [<CompilationRepresentation(CompilationRepresentationFlags.ModuleSuffix)>]
 [<RequireQualifiedAccess>]
 module Engine =
     let create
-        (customStatementHandler: Engine.CustomStatementHandler<'Content, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>)
-        (scenario: Scenario<'Content, 'Label, 'CustomStatement>)
-        (gameState: State<'Content, 'Label>)
-        : Result<Engine<'Content, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>, string> =
+        (customStatementHandler: Engine.CustomStatementHandler<'Content, 'Label, 'VarsContainer, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>)
+        (scenario: Scenario<'Content, 'Label, 'VarsContainer, 'CustomStatement>)
+        (gameState: State<'Content, 'Label, 'VarsContainer>)
+        : Result<Engine<'Content, 'Label, 'VarsContainer, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>, string> =
 
         Engine.Engine.create
             customStatementHandler
@@ -47,7 +47,7 @@ module Engine =
         )
 
     let getCurrentOutputMsg
-        (engine: Engine<'Content, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>)
+        (engine: Engine<'Content, 'Label, 'VarsContainer, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>)
         : OutputMsg<'Content, 'CustomStatementOutput> =
 
         Engine.Engine.getCurrentOutputMsg
@@ -56,8 +56,8 @@ module Engine =
 
     let update
         (msg: InputMsg<'CustomStatementArg>)
-        (engine: Engine<'Content, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>)
-        : Result<Engine<'Content, 'Label, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>, string> =
+        (engine: Engine<'Content, 'Label, 'VarsContainer, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>)
+        : Result<Engine<'Content, 'Label, 'VarsContainer, 'CustomStatement, 'CustomStatementArg, 'CustomStatementOutput>, string> =
 
         match msg with
         | InputMsg.InputMsgCore msg ->

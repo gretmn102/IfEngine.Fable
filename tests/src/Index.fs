@@ -8,7 +8,7 @@ open IfEngine.Fable.SavingEngine
 
 type State =
     {
-        IfEngineState: Engine<Content, Scenario.LabelName, Scenario.CustomStatement, Scenario.CustomStatementArg, Scenario.CustomStatementOutput>
+        IfEngineState: Engine<Content, Scenario.LabelName, Scenario.VarsContainer, Scenario.CustomStatement, Scenario.CustomStatementArg, Scenario.CustomStatementOutput>
     }
 
 type Msg =

@@ -25,12 +25,14 @@ type LabelName =
     | LeftRoad
     | RightRoad
 
+type VarsContainer = IfEngine.SyntaxTree.VarsContainer
+
 let beginLoc = Menu
 
 let applesCount = VarsContainer.createNum "apples"
 let isApplesOnRightRoad = VarsContainer.createBool "isApplesOnRightRoad"
 
-let scenario: Scenario<CommonContent.Content, _, CustomStatement> =
+let scenario: Scenario<CommonContent.Content, _, VarsContainer, CustomStatement> =
     [
         label Menu [
             menu [
