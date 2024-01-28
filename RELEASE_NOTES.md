@@ -1,3 +1,6 @@
+## 2.0.0-prerelease.3
+* update `IfEngine` to 2.0.0-prerelease.4
+
 ## 2.0.0-prerelease.2
 * fix: when starting a new game, the saved game is loaded
 * update `IfEngine` to 2.0.0-prerelease.3
